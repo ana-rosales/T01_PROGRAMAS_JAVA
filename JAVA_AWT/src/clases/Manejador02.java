@@ -1,27 +1,44 @@
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class Programa01 extends JFrame implements ActionListener{
+public class Manejador02 extends JFrame implements ActionListener{
     Button b1, b2;
     JButton jb1, jb2;
-    JPanel pc;
+    JPanel pc, pc2;
+    JLabel etiquetaNombre, etiquetaPanel2;
+    JTextField nombreDado;
+    JButton btnEnviarDatos;
 
-    public Programa01(){
+    public Manejador02(){
         setTitle("Programa 01");
         setSize(600,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(3,2));
+
+        etiquetaNombre = new JLabel("Escribe tu nombre: ");
+        nombreDado = new JTextField(20);
+        btnEnviarDatos = new JButton("Enviar");
 
         pc = new JPanel();
         pc.setBackground(Color.WHITE);
+
+        pc2 = new JPanel();
+        etiquetaPanel2 = new JLabel();
+
+        pc.add(etiquetaNombre);
+        pc.add(nombreDado);
+        pc.add(btnEnviarDatos);
 
         b1 = new Button("Azul");
         b2 = new Button("Naranja");
@@ -32,12 +49,14 @@ public class Programa01 extends JFrame implements ActionListener{
         b2.addActionListener(this);
         jb1.addActionListener(this);
         jb2.addActionListener(this);
+        btnEnviarDatos.addActionListener(this);
 
-        add(b1,BorderLayout.NORTH);
-        add(b2,BorderLayout.SOUTH);
-        add(jb1,BorderLayout.WEST);
-        add(jb2,BorderLayout.EAST);
-        add(pc, BorderLayout.CENTER);
+        add(b1);
+        add(b2);
+        add(jb1);
+        add(jb2);
+        add(pc);
+        add(pc2);
     }
 
     @Override
@@ -58,10 +77,10 @@ public class Programa01 extends JFrame implements ActionListener{
             System.out.println("Presionaste el boton rojo");
             pc.setBackground(Color.RED);
         }
-    }
-
-    public static void main(String[] args) {
-        Programa01 m = new Programa01();
-        m.setVisible(true);
+        if(e.getSource().equals(btnEnviarDatos)){
+            String nombre = nombreDado.getText();
+            JOptionPane.showMessageDialog(null, "Hola, "+nombre);
+            etiquetaPanel2.setText("Hola, "+nombre);
+        }
     }
 }
