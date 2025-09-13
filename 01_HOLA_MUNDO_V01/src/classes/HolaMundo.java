@@ -1,3 +1,5 @@
+package classes;
+
 public class HolaMundo {
     private String nombre = "John Doe";
 
